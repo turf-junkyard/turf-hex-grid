@@ -1,0 +1,36 @@
+{
+  "name": "turf-hex",
+  "version": "0.1.0",
+  "description": "turf hex module",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/turfjs/turf-hex.git"
+  },
+  "keywords": [
+    "turf",
+    "grid",
+    "hex",
+    "hexbin",
+    "points",
+    "geojson"
+  ],
+  "author": "morganherlocker",
+  "contributors": [
+    "jseppi"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/turfjs/turf-hex/issues"
+  },
+  "homepage": "https://github.com/turfjs/turf-hex",
+  "devDependencies": {
+    "tape": "^2.13.4"
+  },
+  "dependencies": {
+    "turf-polygon": "^0.1.1"
+  }
+}
