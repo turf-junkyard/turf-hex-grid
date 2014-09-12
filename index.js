@@ -1,29 +1,15 @@
 var polygon = require('turf-polygon');
 
-// var hex = require('turf-hex')
-// var bbox = [0,0,1,1]
-// var size = .01
-// var hexGrid = hex(bbox, size)
-
-/*
-for each 0 ≤ i < 6:
-    angle = 2 * PI / 6 * i
-    x_i = center_x + size * cos(angle)
-    y_i = center_y + size * sin(angle)
-    if i == 0:
-        moveTo(x_i, y_i)
-    else:
-        lineTo(x_i, y_i)
-*/
-
 module.exports = hexgrid;
-module.exports.hexagon = hexagon;
 
+//Creates a FeatureCollection of flat-topped
+// hexagons aligned in an "odd-q" vertical grid as
+// described on http://www.redblobgames.com/grids/hexagons/
 function hexgrid(extents, size, done) {
-  var xmin = extents[0]
-  var ymin = extents[1]
-  var xmax = extents[2]
-  var ymax = extents[3]
+  var xmin = extents[0];
+  var ymin = extents[1];
+  var xmax = extents[2];
+  var ymax = extents[3];
 
   var fc = {
     type: 'FeatureCollection',
@@ -47,10 +33,9 @@ function hexgrid(extents, size, done) {
     }
   }
 
-
   done = done || function () {};
-
   done(null, fc);
+
   return fc;
 }
 
