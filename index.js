@@ -2,6 +2,33 @@ var polygon = require('turf-polygon');
 
 module.exports = hexgrid;
 
+//Precompute cosines and sines of angles used in hexagon creation
+// for performance gain
+var cosines = [];
+var sines = [];
+for (var i = 0; i < 6; i++) {
+  var angle = 2 * Math.PI/6 * i;
+  cosines.push(Math.cos(angle));
+  sines.push(Math.sin(angle));
+}
+
+//Center should be [x, y]
+function hexagon(center, size) {
+  var vertices = [];
+
+  for (var i = 0; i < 6; i++) {
+    var x = center[0] + size * cosines[i];
+    var y = center[1] + size * sines[i];
+
+    vertices.push([x,y]);
+  }
+
+  //first and last vertex must be the same
+  vertices.push(vertices[0]);
+
+  return polygon([vertices]);
+}
+
 //Creates a FeatureCollection of flat-topped
 // hexagons aligned in an "odd-q" vertical grid as
 // described on http://www.redblobgames.com/grids/hexagons/
@@ -37,26 +64,4 @@ function hexgrid(extents, size, done) {
   done(null, fc);
 
   return fc;
-}
-
-//center is [x, y]
-function hexagon(center, size) {
-  var idx = [0,1,2,3,4,5];
-  var angles = idx.map(function (i) {
-    return 2 * Math.PI/6 * i;
-  });
-
-  var vertices = idx.reduce(function (verts, i) {
-    var angle = angles[i];
-    var x = center[0] + size * Math.cos(angle);
-    var y = center[1] + size * Math.sin(angle);
-
-    verts.push([x,y]);
-    return verts;
-  }, []);
-
-  //first and last vertex must be the same
-  vertices.push(vertices[0]);
-
-  return polygon([vertices]);
 }
