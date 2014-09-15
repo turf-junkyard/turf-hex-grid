@@ -12,12 +12,12 @@ test('hex', function(t) {
 
   fs.writeFileSync(__dirname+'/geojson/hex1.geojson', JSON.stringify(hexgrid))
 
-  var hexgrid = hex([-10,-10,10,10], 1)
+  var hexgrid = hex([-10,-10,10,10], 1.3)
 
   t.ok(hexgrid, 'should work properly with a negative start value')
   t.equal(hexgrid.type, 'FeatureCollection')
   t.equal(hexgrid.features[0].geometry.type, 'Polygon')
-  t.equal(hexgrid.features.length, 168);
+  t.equal(hexgrid.features.length, 99);
 
   fs.writeFileSync(__dirname+'/geojson/hex2.geojson', JSON.stringify(hexgrid))
 
