@@ -20,7 +20,7 @@ size|size of cells in degrees
 ###Usage
 
 ```js
-hex(bbox, distance)
+hex(bbox, size)
 ```
 
 ###Example
