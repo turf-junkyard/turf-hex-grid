@@ -4,6 +4,8 @@ turf-hex
 
 Generates a hexgrid within the specified bbox.
 
+![Example](example.png)
+
 ###Install
 
 ```sh
