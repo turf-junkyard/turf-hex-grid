@@ -28,7 +28,8 @@
   },
   "homepage": "https://github.com/turfjs/turf-hex",
   "devDependencies": {
-    "tape": "^2.13.4"
+    "tape": "^2.13.4",
+    "turf-bbox-polygon": "^0.1.5"
   },
   "dependencies": {
     "turf-polygon": "^0.1.1"

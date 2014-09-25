@@ -13,12 +13,12 @@ for (var i = 0; i < 6; i++) {
 }
 
 //Center should be [x, y]
-function hexagon(center, size) {
+function hexagon(center, radius) {
   var vertices = [];
 
   for (var i = 0; i < 6; i++) {
-    var x = center[0] + size * cosines[i];
-    var y = center[1] + size * sines[i];
+    var x = center[0] + radius * cosines[i];
+    var y = center[1] + radius * sines[i];
 
     vertices.push([x,y]);
   }
@@ -29,34 +29,72 @@ function hexagon(center, size) {
   return polygon([vertices]);
 }
 
-//Creates a FeatureCollection of flat-topped
+// Creates a FeatureCollection of flat-topped
 // hexagons aligned in an "odd-q" vertical grid as
 // described on http://www.redblobgames.com/grids/hexagons/
-function hexgrid(extents, size, done) {
-  var xmin = extents[0];
-  var ymin = extents[1];
-  var xmax = extents[2];
-  var ymax = extents[3];
+//
+// bbox: [xmin, ymin, xmax, ymax]
+// radius: distance from hex center to vertex (in degrees)
+// done: node-style callback (optional)
+//
+// Returns a GeoJSON FeatureCollection of tessellated hexagons
+// that cover the given bbox
+function hexgrid(bbox, radius, done) {
+  var xmin = bbox[0];
+  var ymin = bbox[1];
+  var xmax = bbox[2];
+  var ymax = bbox[3];
 
   var fc = {
     type: 'FeatureCollection',
     features: []
   };
 
-  var x_interval = 3/2 * size;
-  var y_interval = Math.sqrt(3) * size;
-  var x_count = (xmax - xmin) / x_interval;
-  var y_count = (ymax - ymin) / y_interval;
+  var hex_width = radius * 2;
+  var hex_height = Math.sqrt(3)/2 * hex_width;
+  
+  var box_width = xmax - xmin;
+  var box_height = ymax - ymin;
 
-  for (var x = 0; x <= x_count; x++) {
+  var x_interval = 3/4 * hex_width;
+  var y_interval = hex_height;
+
+  var x_count = Math.ceil(box_width / (hex_width - radius/2));
+  if (box_width % (hex_width - radius/2) === 0) {
+    x_count++;
+  }
+  
+  var x_adjust = ((x_count * x_interval - radius/2) - box_width)/2 - radius/2;
+
+  var y_count = Math.ceil(box_height / hex_height);
+
+  var y_adjust = (box_height - y_count * hex_height)/2;
+
+  var hasOffsetY = y_count * hex_height - box_height > hex_height/2;
+  if (hasOffsetY) {
+    y_adjust -= hex_height/4;
+  }
+
+  for (var x = 0; x < x_count; x++) {
     for (var y = 0; y <= y_count; y++) {
-
-      var center_x = x * x_interval + xmin;
-      var center_y = y * y_interval + ymin;
-      if (x % 2 === 1) {
-        center_y -= y_interval/2;
+    
+      var isOdd = x % 2 === 1;
+      if (y === 0 && isOdd) {
+        continue;
       }
-      fc.features.push(hexagon([center_x, center_y], size));
+
+      if (y === 0 && hasOffsetY) {
+        continue;
+      }
+
+      var center_x = x * x_interval + xmin - x_adjust;
+      var center_y = y * y_interval + ymin + y_adjust;
+      
+      if (isOdd) {
+        center_y -= hex_height/2;
+      }
+
+      fc.features.push(hexagon([center_x, center_y], radius));
     }
   }
 
