@@ -1,6 +1,5 @@
 var test = require('tape');
 var fs = require('fs');
-var bboxPoly = require('turf-bbox-polygon');
 var hex = require('./');
 
 test('hex', function(t) {
@@ -10,16 +9,13 @@ test('hex', function(t) {
   t.equal(hexgrid.type, 'FeatureCollection');
   t.equal(hexgrid.features[0].geometry.type, 'Polygon');
   t.equal(hexgrid.features.length, 8);
-
   fs.writeFileSync(__dirname+'/geojson/hex1.geojson', JSON.stringify(hexgrid));
 
-  hexgrid = hex([-2,-2,4,2], 0.4);
-
+  hexgrid = hex([-2,-2,4,2], 0.6);
   t.ok(hexgrid, 'should work properly with a negative start value');
   t.equal(hexgrid.type, 'FeatureCollection');
   t.equal(hexgrid.features[0].geometry.type, 'Polygon');
-  t.equal(hexgrid.features.length, 65);
-
+  t.equal(hexgrid.features.length, 36);
   fs.writeFileSync(__dirname+'/geojson/hex2.geojson', JSON.stringify(hexgrid));
 
   t.end();

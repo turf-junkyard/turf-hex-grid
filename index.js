@@ -59,8 +59,9 @@ function hexgrid(bbox, radius, done) {
   var x_interval = 3/4 * hex_width;
   var y_interval = hex_height;
 
-  var x_count = Math.ceil(box_width / (hex_width - radius/2));
-  if (box_width % (hex_width - radius/2) === 0) {
+  var x_span = box_width / (hex_width - radius/2);
+  var x_count = Math.ceil(x_span);
+  if (Math.round(x_span) === x_count) {
     x_count++;
   }
   
