@@ -75,7 +75,7 @@ function hexgrid(bbox, radius, done) {
   if (hasOffsetY) {
     y_adjust -= hex_height/4;
   }
-
+  
   for (var x = 0; x < x_count; x++) {
     for (var y = 0; y <= y_count; y++) {
     
