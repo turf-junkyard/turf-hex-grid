@@ -2,7 +2,7 @@ turf-hex
 ========
 [![Build Status](https://travis-ci.org/Turfjs/turf-hex.svg?branch=master)](https://travis-ci.org/Turfjs/turf-hex)
 
-Generates a hexgrid within the specified bbox.
+Generates a hexgrid that covers the specified bbox.
 
 ![Example](example.png)
 
