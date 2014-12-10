@@ -1,5 +1,5 @@
 var hex = require('./');
-var Benchmark = require('Benchmark');
+var Benchmark = require('benchmark');
 var fs = require('fs');
 
 var testBoxes = [
