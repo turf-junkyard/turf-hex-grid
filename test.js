@@ -42,6 +42,5 @@ test('hex', function(t) {
 
   });
 
-
   t.end();
 });
