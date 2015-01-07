@@ -1,5 +1,17 @@
 var polygon = require('turf-polygon');
 
+/**
+ * Creates a {@link FeatureCollection} of flat-topped
+ * hexagons aligned in an "odd-q" vertical grid as
+ * described in [Hexagonal Grids](http://www.redblobgames.com/grids/hexagons/)
+ *
+ * @module turf/hex
+ * @param {number[]} bbox in [minX, minY, maxX, maxY] order
+ * @param {number} size size of cells in degrees
+ * @return {FeatureCollection} output
+ * @example
+ * var hexgrid = turf.hex([0,0,10,10], 1)
+ */
 module.exports = hexgrid;
 
 //Precompute cosines and sines of angles used in hexagon creation
@@ -29,16 +41,6 @@ function hexagon(center, radius) {
   return polygon([vertices]);
 }
 
-// Creates a FeatureCollection of flat-topped
-// hexagons aligned in an "odd-q" vertical grid as
-// described on http://www.redblobgames.com/grids/hexagons/
-//
-// bbox: [xmin, ymin, xmax, ymax]
-// radius: distance from hex center to vertex (in degrees)
-// done: node-style callback (optional)
-//
-// Returns a GeoJSON FeatureCollection of tessellated hexagons
-// that cover the given bbox
 function hexgrid(bbox, radius, done) {
   var xmin = bbox[0];
   var ymin = bbox[1];
