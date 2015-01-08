@@ -10,7 +10,11 @@ var polygon = require('turf-polygon');
  * @param {number} size size of cells in degrees
  * @return {FeatureCollection} output
  * @example
- * var hexgrid = turf.hex([0,0,10,10], 1)
+ * var hexgrid = turf.hex([
+ *   7.2669410, 43.695307,
+ *   7.2862529, 43.706476
+ * ], 0.001);
+ * //=hexgrid
  */
 module.exports = hexgrid;
 
