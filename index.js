@@ -6,14 +6,14 @@ var polygon = require('turf-polygon');
  * described in [Hexagonal Grids](http://www.redblobgames.com/grids/hexagons/)
  *
  * @module turf/hex
- * @param {number[]} bbox in [minX, minY, maxX, maxY] order
- * @param {number} size size of cells in degrees
- * @return {FeatureCollection} output
+ * @param {Array<number>} bbox bounding box in [minX, minY, maxX, maxY] order
+ * @param {Number} size size of cells in degrees
+ * @return {FeatureCollection} a FeatureCollection of hexagonal Polygon features in a grid
  * @example
- * var hexgrid = turf.hex([
- *   7.2669410, 43.695307,
- *   7.2862529, 43.706476
- * ], 0.001);
+ * var bbox = [7.2669410, 43.695307, 7.2862529, 43.706476];
+ * var size = 0.001;
+ * var hexgrid = turf.hex(bbox, size);
+ *
  * //=hexgrid
  */
 module.exports = hexgrid;
