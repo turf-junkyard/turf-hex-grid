@@ -1,7 +1,7 @@
 var polygon = require('turf-polygon');
 
 /**
- * Creates a {@link FeatureCollection} of flat-topped
+ * Takes a bounding box and a cell size in degrees and creates a {@link FeatureCollection} of flat-topped
  * hexagons aligned in an "odd-q" vertical grid as
  * described in [Hexagonal Grids](http://www.redblobgames.com/grids/hexagons/)
  *
