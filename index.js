@@ -1,17 +1,18 @@
 var polygon = require('turf-polygon');
 
 /**
- * Takes a bounding box and a cell size in degrees and creates a {@link FeatureCollection} of flat-topped
- * hexagons aligned in an "odd-q" vertical grid as
+ * Takes a bounding box and a cell size in degrees and returns a {@link FeatureCollection} of flat-topped
+ * hexagons ({@link Polygon} features) aligned in an "odd-q" vertical grid as
  * described in [Hexagonal Grids](http://www.redblobgames.com/grids/hexagons/)
  *
  * @module turf/hex
  * @param {Array<number>} bbox bounding box in [minX, minY, maxX, maxY] order
  * @param {Number} size size of cells in degrees
- * @return {FeatureCollection} a FeatureCollection of hexagonal Polygon features in a grid
+ * @return {FeatureCollection} a FeatureCollection of hexagonal {@link Polygon} features in a grid
  * @example
  * var bbox = [7.2669410, 43.695307, 7.2862529, 43.706476];
  * var size = 0.001;
+ *
  * var hexgrid = turf.hex(bbox, size);
  *
  * //=hexgrid
