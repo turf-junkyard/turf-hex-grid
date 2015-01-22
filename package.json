@@ -4,11 +4,12 @@
   "description": "turf hex module",
   "main": "index.js",
   "scripts": {
-    "test": "tape test.js"
+    "test": "tape test.js",
+    "doc": "dox -r < index.js | doxme --readme > README.md"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/turfjs/turf-hex.git"
+    "url": "git://github.com/Turfjs/turf-hex.git"
   },
   "keywords": [
     "turf",
@@ -24,18 +25,20 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/turfjs/turf-hex/issues"
+    "url": "https://github.com/Turfjs/turf-hex/issues"
   },
-  "homepage": "https://github.com/turfjs/turf-hex",
+  "homepage": "https://github.com/Turfjs/turf-hex",
   "devDependencies": {
     "benchmark": "^1.0.0",
     "tape": "^2.13.4",
-    "turf-bbox-polygon": "^0.1.5",
-    "turf-explode": "^0.1.3",
-    "turf-extent": "^0.1.4",
-    "turf-inside": "^0.1.4"
+    "turf-bbox-polygon": "^1.0.0",
+    "turf-explode": "^1.0.0",
+    "turf-extent": "^1.0.3",
+    "turf-inside": "^1.1.3",
+    "dox": "^0.6.1",
+    "doxme": "^1.4.2"
   },
   "dependencies": {
-    "turf-polygon": "^0.1.1"
+    "turf-polygon": "^1.0.1"
   }
 }
