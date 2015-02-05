@@ -6,6 +6,7 @@ var polygon = require('turf-polygon');
  * described in [Hexagonal Grids](http://www.redblobgames.com/grids/hexagons/)
  *
  * @module turf/hex
+ * @category interpolation
  * @param {Array<number>} bbox bounding box in [minX, minY, maxX, maxY] order
  * @param {Number} size size of cells in degrees
  * @return {FeatureCollection} a FeatureCollection of hexagonal {@link Polygon} features in a grid
