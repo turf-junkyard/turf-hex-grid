@@ -15,10 +15,11 @@ var featurecollection = require('turf-featurecollection');
  * @param {String} units used in calculating cellWidth ('miles' or 'kilometers')
  * @return {FeatureCollection} units used in calculating cellWidth ('miles' or 'kilometers')
  * @example
- * var bbox = [7.2669410, 43.695307, 7.2862529, 43.706476];
- * var size = 0.001;
+ * var bbox = [-96,31,-84,40];
+ * var cellWidth = 50;
+ * var units = 'miles';
  *
- * var hexgrid = turf.hex(bbox, size);
+ * var hexgrid = turf.hexGrid(bbox, cellWidth, units);
  *
  * //=hexgrid
  */
