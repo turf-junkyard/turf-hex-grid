@@ -14,24 +14,27 @@ described in [Hexagonal Grids](http://www.redblobgames.com/grids/hexagons/)
 
 ### Parameters
 
-| parameter   | type           | description                                             |
-| ----------- | -------------- | ------------------------------------------------------- |
-| `bbox`      | Array.<number> | bounding box in [minX, minY, maxX, maxY] order          |
-| `cellWidth` | Number         | width of cell in specified units                        |
-| `units`     | String         | used in calculating cellWidth ('miles' or 'kilometers') |
+| parameter   | type              | description                                             |
+| ----------- | ----------------- | ------------------------------------------------------- |
+| `bbox`      | Array\.\<number\> | bounding box in [minX, minY, maxX, maxY] order          |
+| `cellWidth` | Number            | width of cell in specified units                        |
+| `units`     | String            | used in calculating cellWidth ('miles' or 'kilometers') |
 
 
 ### Example
 
 ```js
-var bbox = [7.2669410, 43.695307, 7.2862529, 43.706476];
-var cellWidth = 0.2;
+var bbox = [-96,31,-84,40];
+var cellWidth = 50;
 var units = 'miles';
 
 var hexgrid = turf.hexGrid(bbox, cellWidth, units);
 
 //=hexgrid
 ```
+
+
+**Returns** `FeatureCollection`, units used in calculating cellWidth ('miles' or 'kilometers')
 
 ## Installation
 
