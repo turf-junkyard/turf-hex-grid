@@ -25,9 +25,10 @@ described in [Hexagonal Grids](http://www.redblobgames.com/grids/hexagons/)
 
 ```js
 var bbox = [7.2669410, 43.695307, 7.2862529, 43.706476];
-var size = 0.001;
+var cellWidth = 0.2;
+var units = 'miles';
 
-var hexgrid = turf.hex(bbox, size);
+var hexgrid = turf.hexGrid(bbox, cellWidth, units);
 
 //=hexgrid
 ```
