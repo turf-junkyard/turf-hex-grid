@@ -1,25 +1,28 @@
-var hex = require('./');
+var grid = require('./');
 var Benchmark = require('benchmark');
 var fs = require('fs');
 
-var testBoxes = [
-    [0,0,3,3],
-    [-2,-2,4,2],
-    [1,1,4,4]
-  ];
+var bbox = [
+        -96.6357421875,
+        31.12819929911196,
+        -84.9462890625,
+        40.58058466412764
+      ];
 
-  var testRadii = [1, 0.6, 1.2];
+var highres = grid(bbox, 100, 'miles').features.length;
+var midres = grid(bbox, 10, 'miles').features.length;
+var lowres = grid(bbox, 1, 'miles').features.length;
 
-var suite = new Benchmark.Suite('turf-hex');
+var suite = new Benchmark.Suite('turf-hex-grid');
 suite
-  .add('turf-hex#bbox1',function () {
-    hex(testBoxes[0], testRadii[0]);
+  .add('turf-hex-grid -- '+highres+' cells',function () {
+    grid(bbox, 100, 'miles');
   })
-  .add('turf-hex#bbox2',function () {
-    hex(testBoxes[1], testRadii[1]);
+  .add('turf-hex-grid -- '+midres+' cells',function () {
+    grid(bbox, 10, 'miles');
   })
-  .add('turf-hex#bbox3',function () {
-    hex(testBoxes[2], testRadii[2]);
+  .add('turf-hex-grid -- '+lowres+' cells',function () {
+    grid(bbox, 1, 'miles');
   })
   .on('cycle', function (event) {
     console.log(String(event.target));

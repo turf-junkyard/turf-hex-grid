@@ -1,46 +1,70 @@
 var test = require('tape');
+var grid = require('./');
 var fs = require('fs');
-var inside = require('turf-inside');
-var explode = require('turf-explode');
 var bboxPolygon = require('turf-bbox-polygon');
-var extent = require('turf-extent');
-var hex = require('./');
 
-test('hex', function(t) {
-
-  var testBoxes = [
-    [0,0,3,3],
-    [-2,-2,4,2],
-    [1,1,4,4]
+test('hex-grid', function (t) {
+  var bbox1 = [
+        -96.6357421875,
+        31.12819929911196,
+        -84.9462890625,
+        40.58058466412764
+      ];
+  var bbox2 = [
+          -81.650390625,
+          24.926294766395593,
+          -79.8486328125,
+          26.43122806450644
+        ];
+  var bbox3 = [
+        -77.3876953125,
+        38.71980474264239,
+        -76.9482421875,
+        39.027718840211605
+      ];
+  var bbox4 = [
+    63.6328125,
+    11.867350911459308,
+    75.234375,
+    47.754097979680026
   ];
 
-  var testRadii = [1, 0.6, 1.2];
+  var grid1 = grid(bbox1, 50, 'miles');
+  var grid2 = grid(bbox2, 5, 'miles');
+  var grid3 = grid(bbox3, 2, 'miles');
+  var grid4 = grid(bbox4, 50, 'kilometers');
 
-  testBoxes.forEach(function (bbox, i) {
-    var radius = testRadii[i];
-    var hexgrid = hex(bbox, radius);
+  t.ok(grid1.features.length, '50mi grid');
+  t.ok(grid2.features.length, '5mi grid');
+  t.ok(grid3.features.length, '2mi grid');
+  t.ok(grid4.features.length, '50km grid');
 
-    t.ok(hexgrid, 'should create a hexgrid as a Polygon FeatureCollection');
-    t.equal(hexgrid.type, 'FeatureCollection');
-    t.equal(hexgrid.features[0].geometry.type, 'Polygon');
+  t.equal(
+      grid(
+        [-96.6357421875,31.12819929911196,-84.9462890625,40.58058466412764], 
+        100, 'miles')
+      .features.length,
+      70
+    );
 
-    var hexExtent = extent(hexgrid);
-    hexExtent[0] += radius/2; //adjust for leftmost hex vertex
-    hexExtent[2] -= radius/2; //adjust for rightmost hex vertex
-    var hexPoly = bboxPolygon(hexExtent);
-    var bboxPoly = bboxPolygon(bbox);
-    var bboxVertices = explode(bboxPoly);
+  grid1.features.push(referencePoly(bbox1));
+  grid2.features.push(referencePoly(bbox2));
+  grid3.features.push(referencePoly(bbox3));
+  grid4.features.push(referencePoly(bbox4));
 
-    bboxVertices.features.forEach(function (vertex) {
-      if (!inside(vertex, hexPoly)) {
-        t.fail('vertex outside of bbox');
-      }
-    });
-
-    fs.writeFileSync(__dirname+'/geojson/hex' + i + '.geojson',
-      JSON.stringify(hexgrid));
-
-  });
+  fs.writeFileSync(__dirname+'/fixtures/out/grid1.geojson', JSON.stringify(grid1,null,2));
+  fs.writeFileSync(__dirname+'/fixtures/out/grid2.geojson', JSON.stringify(grid2,null,2));
+  fs.writeFileSync(__dirname+'/fixtures/out/grid3.geojson', JSON.stringify(grid3,null,2));
+  fs.writeFileSync(__dirname+'/fixtures/out/grid4.geojson', JSON.stringify(grid4,null,2));
 
   t.end();
 });
+
+function referencePoly (bbox) {
+  var poly = bboxPolygon(bbox);
+  poly.properties = {
+    'fill-opacity': 0,
+    'stroke': '#0ff'
+  };
+  return poly;
+}
