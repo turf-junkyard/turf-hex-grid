@@ -13,7 +13,7 @@ var featurecollection = require('turf-featurecollection');
  * @param {Array<number>} bbox bounding box in [minX, minY, maxX, maxY] order
  * @param {Number} cellWidth width of cell in specified units
  * @param {String} units used in calculating cellWidth ('miles' or 'kilometers')
- * @return {FeatureCollection} units used in calculating cellWidth ('miles' or 'kilometers')
+ * @return {FeatureCollection<Polygon>} a hexagonal grid
  * @example
  * var bbox = [-96,31,-84,40];
  * var cellWidth = 50;
