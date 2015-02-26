@@ -9,7 +9,7 @@
 
 Takes a bounding box and a cell size in degrees and returns a FeatureCollection of flat-topped
 hexagons (Polygon features) aligned in an "odd-q" vertical grid as
-described in [Hexagonal Grids](http://www.redblobgames.com/grids/hexagons/)
+described in [Hexagonal Grids](http://www.redblobgames.com/grids/hexagons/).
 
 
 ### Parameters
@@ -34,7 +34,7 @@ var hexgrid = turf.hexGrid(bbox, cellWidth, units);
 ```
 
 
-**Returns** `FeatureCollection`, units used in calculating cellWidth ('miles' or 'kilometers')
+**Returns** `FeatureCollection.<Polygon>`, a hexagonal grid
 
 ## Installation
 
