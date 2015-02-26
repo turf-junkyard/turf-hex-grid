@@ -6,7 +6,7 @@ var featurecollection = require('turf-featurecollection');
 /**
  * Takes a bounding box and a cell size in degrees and returns a {@link FeatureCollection} of flat-topped
  * hexagons ({@link Polygon} features) aligned in an "odd-q" vertical grid as
- * described in [Hexagonal Grids](http://www.redblobgames.com/grids/hexagons/)
+ * described in [Hexagonal Grids](http://www.redblobgames.com/grids/hexagons/).
  *
  * @module turf/hex-grid
  * @category interpolation
