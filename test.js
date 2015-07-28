@@ -44,7 +44,7 @@ test('hex-grid', function (t) {
         [-96.6357421875,31.12819929911196,-84.9462890625,40.58058466412764], 
         100, 'miles')
       .features.length,
-      70
+      85
     );
 
   grid1.features.push(referencePoly(bbox1));
