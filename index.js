@@ -42,7 +42,7 @@ module.exports = function hexgrid(bbox, cell, units) {
   var radius = cellWidth / 2;
 
   var hex_width = radius * 2;
-  var hex_height = Math.sqrt(3)/2 * hex_width;
+  var hex_height = Math.sqrt(3)/2 * cellHeight;
 
   var box_width = bbox[2] - bbox[0];
   var box_height = bbox[3] - bbox[1];
@@ -86,7 +86,7 @@ module.exports = function hexgrid(bbox, cell, units) {
       if (isOdd) {
         center_y -= hex_height/2;
       }
-      fc.features.push(hexagon([center_x, center_y], radius));
+      fc.features.push(hexagon([center_x, center_y], cellWidth / 2, cellHeight / 2));
     }
   }
 
@@ -94,11 +94,11 @@ module.exports = function hexgrid(bbox, cell, units) {
 };
 
 //Center should be [x, y]
-function hexagon(center, radius) {
+function hexagon(center, rx, ry) {
   var vertices = [];
   for (var i = 0; i < 6; i++) {
-    var x = center[0] + radius * cosines[i];
-    var y = center[1] + radius * sines[i];
+    var x = center[0] + rx * cosines[i];
+    var y = center[1] + ry * sines[i];
     vertices.push([x,y]);
   }
   //first and last vertex must be the same
