@@ -1,6 +1,6 @@
 {
   "name": "turf-hex-grid",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -21,7 +21,10 @@
   ],
   "author": "morganherlocker",
   "contributors": [
-    "jseppi"
+    "jseppi",
+    "jvail",
+    "lyzidiamond",
+    "tmcw"
   ],
   "license": "MIT",
   "bugs": {
