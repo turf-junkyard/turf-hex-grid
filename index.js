@@ -29,7 +29,7 @@ var featurecollection = require('turf-featurecollection');
 var cosines = [];
 var sines = [];
 for (var i = 0; i < 6; i++) {
-  var angle = 2 * Math.PI/6 * i;
+  var angle = 2 * Math.PI / 6 * i;
   cosines.push(Math.cos(angle));
   sines.push(Math.sin(angle));
 }
@@ -41,35 +41,35 @@ module.exports = function hexgrid(bbox, cell, units) {
   var cellHeight = yFraction * (bbox[3] - bbox[1]);
   var radius = cellWidth / 2;
 
-  var hex_width = radius * 2;
-  var hex_height = Math.sqrt(3)/2 * cellHeight;
+  var hexWidth = radius * 2;
+  var hexHeight = Math.sqrt(3) / 2 * cellHeight;
 
-  var box_width = bbox[2] - bbox[0];
-  var box_height = bbox[3] - bbox[1];
+  var boxWidth = bbox[2] - bbox[0];
+  var boxHeight = bbox[3] - bbox[1];
 
-  var x_interval = 3/4 * hex_width;
-  var y_interval = hex_height;
+  var xInterval = 3 / 4 * hexWidth;
+  var yInterval = hexHeight;
 
-  var x_span = box_width / (hex_width - radius/2);
-  var x_count = Math.ceil(x_span);
-  if (Math.round(x_span) === x_count) {
-    x_count++;
+  var xSpan = boxWidth / (hexWidth - radius / 2);
+  var xCount = Math.ceil(xSpan);
+  if (Math.round(xSpan) === xCount) {
+    xCount++;
   }
 
-  var x_adjust = ((x_count * x_interval - radius/2) - box_width)/2 - radius/2;
+  var xAdjust = ((xCount * xInterval - radius / 2) - boxWidth) / 2 - radius / 2;
 
-  var y_count = Math.ceil(box_height / hex_height);
+  var yCount = Math.ceil(boxHeight / hexHeight);
 
-  var y_adjust = (box_height - y_count * hex_height)/2;
+  var yAdjust = (boxHeight - yCount * hexHeight) / 2;
 
-  var hasOffsetY = y_count * hex_height - box_height > hex_height/2;
+  var hasOffsetY = yCount * hexHeight - boxHeight > hexHeight / 2;
   if (hasOffsetY) {
-    y_adjust -= hex_height/4;
+    yAdjust -= hexHeight / 4;
   }
 
   var fc = featurecollection([]);
-  for (var x = 0; x < x_count; x++) {
-    for (var y = 0; y <= y_count; y++) {
+  for (var x = 0; x < xCount; x++) {
+    for (var y = 0; y <= yCount; y++) {
 
       var isOdd = x % 2 === 1;
       if (y === 0 && isOdd) {
@@ -80,13 +80,13 @@ module.exports = function hexgrid(bbox, cell, units) {
         continue;
       }
 
-      var center_x = x * x_interval + bbox[0] - x_adjust;
-      var center_y = y * y_interval + bbox[1] + y_adjust;
+      var centerX = x * xInterval + bbox[0] - xAdjust;
+      var centerY = y * yInterval + bbox[1] + yAdjust;
 
       if (isOdd) {
-        center_y -= hex_height/2;
+        centerY -= hexHeight / 2;
       }
-      fc.features.push(hexagon([center_x, center_y], cellWidth / 2, cellHeight / 2));
+      fc.features.push(hexagon([centerX, centerY], cellWidth / 2, cellHeight / 2));
     }
   }
 
@@ -99,7 +99,7 @@ function hexagon(center, rx, ry) {
   for (var i = 0; i < 6; i++) {
     var x = center[0] + rx * cosines[i];
     var y = center[1] + ry * sines[i];
-    vertices.push([x,y]);
+    vertices.push([x, y]);
   }
   //first and last vertex must be the same
   vertices.push(vertices[0]);
